@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signupSuccess, authFailure } from '../redux/authSlice';
+import Notification from '../components/Notification';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission for signup
-    console.log('Signup Submitted:', { name, email, password });
+    // Dummy logic for successful signup
+    if (email && password) {
+      dispatch(signupSuccess({ name, email }));
+      setNotificationMessage('Signup successful!');
+    } else {
+      dispatch(authFailure('Signup failed'));
+      setNotificationMessage('Signup failed!');
+    }
   };
 
   return (
@@ -71,11 +82,13 @@ const Register = () => {
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{' '}
             <a href="/login" className="text-blue-500 hover:underline">
-              Login
+              Log in
             </a>
           </p>
         </form>
       </div>
+
+      {notificationMessage && <Notification message={notificationMessage} onClose={() => setNotificationMessage('')} />}
     </div>
   );
 };

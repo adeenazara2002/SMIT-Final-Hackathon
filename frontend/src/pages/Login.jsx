@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginSuccess, authFailure } from '../redux/authSlice';
+import Notification from '../components/Notification';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission for login
-    console.log('Login Submitted:', { email, password });
+    // Dummy logic for successful login
+    if (email === 'user@example.com' && password === 'password') {
+      dispatch(loginSuccess({ email }));
+      setNotificationMessage('Login successful!');
+    } else {
+      dispatch(authFailure('Invalid credentials'));
+      setNotificationMessage('Login failed!');
+    }
   };
 
   return (
@@ -60,6 +71,8 @@ const Login = () => {
           </p>
         </form>
       </div>
+
+      {notificationMessage && <Notification message={notificationMessage} onClose={() => setNotificationMessage('')} />}
     </div>
   );
 };
