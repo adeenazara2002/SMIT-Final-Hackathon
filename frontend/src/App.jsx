@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 function App() {
-  const [activePage, setActivePage] = useState('taskboard'); // Default page is TaskBoard
+  const [activePage, setActivePage] = useState('taskboard');
 
   const renderPage = () => {
     switch (activePage) {

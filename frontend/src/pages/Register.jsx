@@ -12,7 +12,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dummy logic for successful signup
+    
     if (email && password) {
       dispatch(signupSuccess({ name, email }));
       setNotificationMessage('Signup successful!');

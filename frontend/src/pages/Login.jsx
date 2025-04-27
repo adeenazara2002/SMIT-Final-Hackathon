@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dummy logic for successful login
+    
     if (email === 'user@example.com' && password === 'password') {
       dispatch(loginSuccess({ email }));
       setNotificationMessage('Login successful!');
